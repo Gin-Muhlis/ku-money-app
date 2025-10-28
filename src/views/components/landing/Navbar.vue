@@ -15,7 +15,9 @@
           <a href="#pricing" class="text-gray-700 hover:text-primary font-medium transition"
             >Pricing</a
           >
-          <a href="#about" class="text-gray-700 hover:text-primary font-medium transition">About</a>
+          <RouterLink to="/about" class="text-gray-700 hover:text-primary font-medium transition">
+            About
+          </RouterLink>
 
           <!-- Right Links -->
           <RouterLink to="/login" class="text-gray-700 hover:text-primary font-medium transition">
@@ -70,13 +72,13 @@
           >
             Pricing
           </a>
-          <a
-            href="#about"
+          <RouterLink
+            to="/about"
             class="block text-gray-700 hover:text-primary font-medium transition py-2"
             @click="isMenuOpen = false"
           >
             About
-          </a>
+          </RouterLink>
           <RouterLink
             to="/login"
             class="block text-gray-700 hover:text-primary font-medium transition py-2"

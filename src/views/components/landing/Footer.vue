@@ -3,30 +3,30 @@
     <div class="max-w-6xl mx-auto px-6 py-12 grid gap-8 md:grid-cols-4">
       <div>
         <div class="text-2xl font-extrabold tracking-tight">Ku‑Money</div>
-        <p class="mt-3 text-sm opacity-80">SaaS pengelola keuangan yang sederhana, cepat, dan aman.</p>
+        <p class="mt-3 text-sm opacity-80">
+          SaaS pengelola keuangan yang sederhana, cepat, dan aman.
+        </p>
       </div>
       <div>
-        <div class="text-sm font-semibold uppercase opacity-90 mb-3">Produk</div>
+        <div class="text-sm font-semibold uppercase opacity-90 mb-3">Menu</div>
         <ul class="space-y-2 text-sm opacity-90">
-          <li><a class="link link-hover">Fitur</a></li>
-          <li><a class="link link-hover">Pricing</a></li>
-          <li><a class="link link-hover">Roadmap</a></li>
+          <li><a href="#advantages" class="link link-hover">Advantages</a></li>
+          <li><a href="#features" class="link link-hover">Feature</a></li>
+          <li><a href="#testimonials" class="link link-hover">Testimonials</a></li>
         </ul>
       </div>
       <div>
-        <div class="text-sm font-semibold uppercase opacity-90 mb-3">Perusahaan</div>
+        <div class="text-sm font-semibold uppercase opacity-90 mb-3">Halaman</div>
         <ul class="space-y-2 text-sm opacity-90">
-          <li><a class="link link-hover">Tentang</a></li>
-          <li><a class="link link-hover">Blog</a></li>
-          <li><a class="link link-hover">Kontak</a></li>
+          <li><a href="/about" class="link link-hover">About</a></li>
+          <li><a href="/pricing" class="link link-hover">Pricing</a></li>
         </ul>
       </div>
       <div>
-        <div class="text-sm font-semibold uppercase opacity-90 mb-3">Legal</div>
+        <div class="text-sm font-semibold uppercase opacity-90 mb-3">Kontak</div>
         <ul class="space-y-2 text-sm opacity-90">
-          <li><a class="link link-hover">Ketentuan Layanan</a></li>
-          <li><a class="link link-hover">Kebijakan Privasi</a></li>
-          <li><a class="link link-hover">Keamanan</a></li>
+          <li><a class="link link-hover">0823-4337-1647</a></li>
+          <li><a class="link link-hover">ginmuhlis@gmail.com</a></li>
         </ul>
       </div>
     </div>

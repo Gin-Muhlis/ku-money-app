@@ -1,5 +1,5 @@
 <template>
-  <section class="py-20 bg-base-100">
+  <section class="py-20 bg-base-100" id="advantages">
     <div class="max-w-6xl mx-auto px-6">
       <div class="text-center mb-12">
         <h2 class="text-3xl md:text-4xl font-extrabold text-neutral mb-4">Kenapa Ku‑Money?</h2>
