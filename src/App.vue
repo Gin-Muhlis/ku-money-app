@@ -1,11 +1,45 @@
-<script setup></script>
-
 <template>
-  <h1>You did it!</h1>
-  <p>
-    Visit <a href="https://vuejs.org/" target="_blank" rel="noopener">vuejs.org</a> to read the
-    documentation
-  </p>
+  <transition name="fade">
+    <ui-full-loading v-if="loading.full" />
+  </transition>
+
+  <div>
+    <main>
+      <router-view />
+    </main>
+  </div>
 </template>
 
-<style scoped></style>
+<script setup>
+import { onMounted } from 'vue'
+import { useLoadingStore } from '@/stores/loading.js'
+
+import AOS from 'aos'
+
+import uiFullLoading from '@/views/components/ui/ui-full-loading.vue'
+
+const loading = useLoadingStore()
+
+onMounted(() => {
+  AOS.init()
+})
+</script>
+
+<style scoped>
+.fade-enter-active {
+  animation: fade 0.3s;
+}
+
+.fade-enter-leave {
+  animation: fade 0.3s reverse;
+}
+
+@keyframes fade {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+</style>

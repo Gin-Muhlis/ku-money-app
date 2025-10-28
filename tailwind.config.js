@@ -1,41 +1,38 @@
 /** @type {import('tailwindcss').Config} */
+import daisyui from 'daisyui'
 export default {
-  content: [
-    "./index.html",
-    "./src/**/*.{vue,js,ts,jsx,tsx}",
-  ],
+  content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
   theme: {
-    extend: {
-      colors: {
-        primary: '#06b6d4', // cyan
-        secondary: '#fbbf24', // amber
-        accent: '#22c55e', // green
-        neutral: '#1e293b', // slate
-        'base-100': '#f9fafb', // background
-        info: '#3b82f6', // blue
-        success: '#10b981', // emerald
-        warning: '#f59e0b', // amber
-        error: '#ef4444', // red
-      },
-    },
+    extend: {},
   },
-  plugins: [require("daisyui")],
+  plugins: [daisyui],
   daisyui: {
     themes: [
       {
         kumoney: {
-          primary: "#06b6d4",     // cyan
-          secondary: "#fbbf24",   // amber
-          accent: "#22c55e",      // green
-          neutral: "#1e293b",     // slate
-          "base-100": "#f9fafb",  // soft background
-          info: "#3b82f6",
-          success: "#10b981",
-          warning: "#f59e0b",
-          error: "#ef4444",
+          primary: '#6366f1',
+          'primary-content': '#ffffff',
+          secondary: '#fbbf24',
+          'secondary-content': '#ffffff',
+          accent: '#22c55e',
+          'accent-content': '#ffffff',
+          neutral: '#1e293b',
+          'neutral-content': '#ffffff',
+          'base-100': '#f9fafb',
+          'base-200': '#f3f4f6',
+          'base-300': '#e5e7eb',
+          'base-content': '#1e293b',
+          info: '#3b82f6',
+          'info-content': '#ffffff',
+          success: '#10b981',
+          'success-content': '#ffffff',
+          warning: '#f59e0b',
+          'warning-content': '#ffffff',
+          error: '#ef4444',
+          'error-content': '#ffffff',
         },
       },
     ],
-    darkTheme: "kumoney",
+    defaultTheme: 'kumoney',
   },
 }
