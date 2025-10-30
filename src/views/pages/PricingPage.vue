@@ -1,0 +1,75 @@
+<template>
+  <div class="min-h-screen bg-base-100">
+    <Navbar />
+
+    <!-- Pricing Content -->
+    <div class="pt-32 pb-20 px-6">
+      <div class="max-w-7xl mx-auto">
+        <!-- Header -->
+        <div class="text-center mb-16">
+          <h1 class="text-4xl md:text-5xl font-extrabold text-neutral mb-4">
+            Pilih Paket <span class="text-primary">Terbaik</span> untuk Anda
+          </h1>
+          <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+            Kelola keuangan dengan lebih mudah. Pilih paket yang sesuai dengan kebutuhan Anda.
+          </p>
+        </div>
+
+        <!-- Loading State -->
+        <div v-if="loading" class="flex justify-center items-center py-20">
+          <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+        </div>
+
+        <!-- Error State -->
+        <div v-else-if="error" class="text-center py-20">
+          <p class="text-error text-lg">{{ error }}</p>
+          <button
+            @click="fetchPackages"
+            class="mt-4 px-6 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition"
+          >
+            Coba Lagi
+          </button>
+        </div>
+
+        <!-- Packages Grid -->
+        <div v-else class="grid md:grid-cols-3 gap-8">
+          <PricingCard v-for="pkg in packages" :key="pkg._id" :package-data="pkg" />
+        </div>
+      </div>
+    </div>
+
+    <Footer />
+  </div>
+</template>
+
+<script setup>
+import { ref, onMounted } from 'vue'
+import { getPackages } from '@/services/package.service'
+import Navbar from '@/views/components/landing/Navbar.vue'
+import Footer from '@/views/components/landing/Footer.vue'
+import PricingCard from '@/views/components/pricing/PricingCard.vue'
+
+const packages = ref([])
+const loading = ref(true)
+const error = ref(null)
+
+// Fetch packages from API
+const fetchPackages = async () => {
+  loading.value = true
+  error.value = null
+
+  try {
+    const response = await getPackages()
+    packages.value = response.data || []
+  } catch (err) {
+    error.value = 'Gagal memuat data paket. Silakan coba lagi.'
+    console.error('Error fetching packages:', err)
+  } finally {
+    loading.value = false
+  }
+}
+
+onMounted(() => {
+  fetchPackages()
+})
+</script>

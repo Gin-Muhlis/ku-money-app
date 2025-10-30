@@ -12,9 +12,9 @@
         <!-- Desktop Menu (Hidden on Mobile) -->
         <div class="hidden md:flex items-center space-x-8">
           <!-- Left Links -->
-          <a href="#pricing" class="text-gray-700 hover:text-primary font-medium transition"
-            >Pricing</a
-          >
+          <RouterLink to="/pricing" class="text-gray-700 hover:text-primary font-medium transition">
+            Pricing
+          </RouterLink>
           <RouterLink to="/about" class="text-gray-700 hover:text-primary font-medium transition">
             About
           </RouterLink>
@@ -65,13 +65,13 @@
       <!-- Mobile Menu (Dropdown) -->
       <transition name="slide-fade">
         <div v-if="isMenuOpen" class="md:hidden mt-4 pb-4 space-y-3 border-t border-gray-100 pt-4">
-          <a
-            href="#pricing"
+          <RouterLink
+            to="/pricing"
             class="block text-gray-700 hover:text-primary font-medium transition py-2"
             @click="isMenuOpen = false"
           >
             Pricing
-          </a>
+          </RouterLink>
           <RouterLink
             to="/about"
             class="block text-gray-700 hover:text-primary font-medium transition py-2"

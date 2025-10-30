@@ -1,6 +1,6 @@
 <template>
   <section
-    class="relative flex flex-col items-center justify-center text-center bg-gradient-to-b from-primary/5 via-white to-white overflow-hidden top-16"
+    class="relative flex flex-col items-center justify-center text-center bg-linear-to-b from-primary/5 via-white to-white overflow-hidden top-16"
   >
     <!-- Background blur circles -->
     <div
