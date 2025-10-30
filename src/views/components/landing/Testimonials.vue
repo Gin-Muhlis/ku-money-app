@@ -1,8 +1,8 @@
 <template>
-  <section class="py-20 bg-base-100" id="testimonials">
+  <section class="py-20 bg-gray-50" id="testimonials">
     <div class="max-w-6xl mx-auto px-6">
       <div class="text-center mb-12">
-        <h2 class="text-3xl md:text-4xl font-extrabold text-neutral mb-4">Apa Kata Mereka?</h2>
+        <h2 class="text-3xl md:text-4xl font-extrabold text-slate-800 mb-4">Apa Kata Mereka?</h2>
         <p class="text-gray-600 max-w-2xl mx-auto">
           Pengguna Ku‑Money merasakan kontrol finansial yang lebih baik dan proses pencatatan yang
           lebih menyenangkan.
@@ -18,7 +18,7 @@
               alt="Avatar"
             />
             <div>
-              <p class="font-semibold text-neutral">Ahmad</p>
+              <p class="font-semibold text-slate-800">Ahmad</p>
               <p class="text-sm text-gray-500">Freelancer</p>
             </div>
           </div>
@@ -36,7 +36,7 @@
               alt="Avatar"
             />
             <div>
-              <p class="font-semibold text-neutral">Budi</p>
+              <p class="font-semibold text-slate-800">Budi</p>
               <p class="text-sm text-gray-500">Karyawan</p>
             </div>
           </div>
@@ -54,7 +54,7 @@
               alt="Avatar"
             />
             <div>
-              <p class="font-semibold text-neutral">Cici</p>
+              <p class="font-semibold text-slate-800">Cici</p>
               <p class="text-sm text-gray-500">Wiraswasta</p>
             </div>
           </div>

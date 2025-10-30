@@ -6,7 +6,7 @@
       <div class="flex justify-center">
         <RouterLink
           to="/"
-          class="text-2xl font-extrabold tracking-tight text-neutral hover:text-primary transition"
+          class="text-2xl font-extrabold tracking-tight text-slate-800 hover:text-indigo-600 transition"
         >
           Ku‑Money
         </RouterLink>

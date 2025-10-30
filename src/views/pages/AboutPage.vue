@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-base-100">
+  <div class="min-h-screen bg-gray-50">
     <Navbar />
 
     <!-- About Content -->
@@ -7,17 +7,17 @@
       <div class="max-w-4xl mx-auto">
         <!-- Header -->
         <div class="text-center mb-12">
-          <h1 class="text-4xl md:text-5xl font-extrabold text-neutral mb-4">
-            Tentang <span class="text-primary">Ku‑Money</span>
+          <h1 class="text-4xl md:text-5xl font-extrabold text-slate-800 mb-4">
+            Tentang <span class="text-indigo-600">Ku‑Money</span>
           </h1>
-          <div class="w-24 h-1 bg-primary mx-auto rounded-full"></div>
+          <div class="w-24 h-1 bg-indigo-600 mx-auto rounded-full"></div>
         </div>
 
         <!-- Content -->
         <div class="prose prose-lg max-w-none">
           <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 md:p-12">
             <p class="text-gray-700 leading-relaxed mb-6">
-              <span class="font-semibold text-primary">Ku‑Money</span> adalah aplikasi SaaS
+              <span class="font-semibold text-indigo-600">Ku‑Money</span> adalah aplikasi SaaS
               (Software as a Service) modern yang dirancang khusus untuk membantu Anda mengelola
               keuangan pribadi dengan lebih mudah, efisien, dan terstruktur.
             </p>
@@ -45,7 +45,7 @@
           <!-- Vision & Mission -->
           <div class="grid md:grid-cols-2 gap-6 mt-8">
             <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
-              <h3 class="text-xl font-bold text-neutral mb-3">Visi Kami</h3>
+              <h3 class="text-xl font-bold text-slate-800 mb-3">Visi Kami</h3>
               <p class="text-gray-600">
                 Menjadi platform pengelolaan keuangan pribadi terdepan yang memberdayakan jutaan
                 pengguna untuk mencapai kesejahteraan finansial.
@@ -53,7 +53,7 @@
             </div>
 
             <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
-              <h3 class="text-xl font-bold text-neutral mb-3">Misi Kami</h3>
+              <h3 class="text-xl font-bold text-slate-800 mb-3">Misi Kami</h3>
               <p class="text-gray-600">
                 Menyediakan solusi pengelolaan keuangan yang mudah, aman, dan accessible untuk
                 semua kalangan dengan teknologi terkini.
@@ -65,7 +65,7 @@
           <div class="text-center mt-12">
             <RouterLink
               to="/register"
-              class="inline-block px-8 py-4 bg-primary text-white rounded-xl font-semibold hover:bg-primary/90 transition shadow-lg"
+              class="inline-block px-8 py-4 bg-indigo-600 text-white rounded-xl font-semibold hover:bg-indigo-700/90 transition shadow-lg"
             >
               Mulai Sekarang Gratis
             </RouterLink>

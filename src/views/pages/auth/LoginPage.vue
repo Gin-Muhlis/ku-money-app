@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-base-200">
+  <div class="min-h-screen bg-gray-100">
     <AuthNavbar />
 
     <div class="flex items-center justify-center min-h-screen px-4">
@@ -7,7 +7,7 @@
         <div class="bg-white rounded-2xl shadow-lg p-8">
           <!-- Header -->
           <div class="text-center mb-8">
-            <h1 class="text-3xl font-extrabold text-neutral mb-2">Masuk</h1>
+            <h1 class="text-3xl font-extrabold text-slate-800 mb-2">Masuk</h1>
             <p class="text-gray-600">Selamat datang kembali di Ku‑Money</p>
           </div>
 
@@ -15,7 +15,7 @@
           <form @submit.prevent="handleLogin" class="space-y-5">
             <!-- Email -->
             <div>
-              <label for="email" class="block text-sm font-semibold text-neutral mb-2">
+              <label for="email" class="block text-sm font-semibold text-slate-800 mb-2">
                 Email
               </label>
               <input
@@ -23,14 +23,14 @@
                 v-model="form.email"
                 type="email"
                 placeholder="email@example.com"
-                class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition"
+                class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:border-transparent transition"
                 required
               />
             </div>
 
             <!-- Password -->
             <div>
-              <label for="password" class="block text-sm font-semibold text-neutral mb-2">
+              <label for="password" class="block text-sm font-semibold text-slate-800 mb-2">
                 Password
               </label>
               <input
@@ -38,20 +38,20 @@
                 v-model="form.password"
                 type="password"
                 placeholder="Masukkan password"
-                class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition"
+                class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:border-transparent transition"
                 required
               />
             </div>
 
             <!-- Forgot Password -->
             <div class="text-right">
-              <a href="#" class="text-sm text-primary hover:underline">Lupa password?</a>
+              <a href="#" class="text-sm text-indigo-600 hover:underline">Lupa password?</a>
             </div>
 
             <!-- Submit Button -->
             <button
               type="submit"
-              class="w-full bg-primary text-white py-3 rounded-xl font-semibold hover:bg-primary/90 transition shadow-md hover:shadow-lg"
+              class="w-full bg-indigo-600 text-white py-3 rounded-xl font-semibold hover:bg-indigo-700/90 transition shadow-md hover:shadow-lg"
             >
               Masuk
             </button>
@@ -61,7 +61,7 @@
           <div class="mt-6 text-center">
             <p class="text-gray-600">
               Belum punya akun?
-              <RouterLink to="/register" class="text-primary font-semibold hover:underline">
+              <RouterLink to="/register" class="text-indigo-600 font-semibold hover:underline">
                 Daftar sekarang
               </RouterLink>
             </p>

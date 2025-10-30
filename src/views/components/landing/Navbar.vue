@@ -4,7 +4,7 @@
       <div class="flex items-center justify-between">
         <!-- Logo (Always Visible) -->
         <div class="shrink-0">
-          <RouterLink to="/" class="text-2xl font-bold text-primary tracking-tight">
+          <RouterLink to="/" class="text-2xl font-bold text-indigo-600 tracking-tight">
             Ku<span class="text-gray-800">‑Money</span>
           </RouterLink>
         </div>
@@ -12,20 +12,20 @@
         <!-- Desktop Menu (Hidden on Mobile) -->
         <div class="hidden md:flex items-center space-x-8">
           <!-- Left Links -->
-          <RouterLink to="/pricing" class="text-gray-700 hover:text-primary font-medium transition">
+          <RouterLink to="/pricing" class="text-gray-700 hover:text-indigo-600 font-medium transition">
             Pricing
           </RouterLink>
-          <RouterLink to="/about" class="text-gray-700 hover:text-primary font-medium transition">
+          <RouterLink to="/about" class="text-gray-700 hover:text-indigo-600 font-medium transition">
             About
           </RouterLink>
 
           <!-- Right Links -->
-          <RouterLink to="/login" class="text-gray-700 hover:text-primary font-medium transition">
+          <RouterLink to="/login" class="text-gray-700 hover:text-indigo-600 font-medium transition">
             Login
           </RouterLink>
           <RouterLink
             to="/register"
-            class="px-4 py-2 bg-primary text-white rounded-lg font-medium hover:bg-primary/90 transition shadow-sm"
+            class="px-4 py-2 bg-indigo-600 text-white rounded-lg font-medium hover:bg-indigo-700 transition shadow-sm"
           >
             Register
           </RouterLink>
@@ -34,7 +34,7 @@
         <!-- Mobile Menu Button (Visible on Mobile Only) -->
         <button
           @click="isMenuOpen = !isMenuOpen"
-          class="md:hidden p-2 text-gray-700 hover:text-primary transition"
+          class="md:hidden p-2 text-gray-700 hover:text-indigo-600 transition"
           aria-label="Toggle menu"
         >
           <svg
@@ -67,28 +67,28 @@
         <div v-if="isMenuOpen" class="md:hidden mt-4 pb-4 space-y-3 border-t border-gray-100 pt-4">
           <RouterLink
             to="/pricing"
-            class="block text-gray-700 hover:text-primary font-medium transition py-2"
+            class="block text-gray-700 hover:text-indigo-600 font-medium transition py-2"
             @click="isMenuOpen = false"
           >
             Pricing
           </RouterLink>
           <RouterLink
             to="/about"
-            class="block text-gray-700 hover:text-primary font-medium transition py-2"
+            class="block text-gray-700 hover:text-indigo-600 font-medium transition py-2"
             @click="isMenuOpen = false"
           >
             About
           </RouterLink>
           <RouterLink
             to="/login"
-            class="block text-gray-700 hover:text-primary font-medium transition py-2"
+            class="block text-gray-700 hover:text-indigo-600 font-medium transition py-2"
             @click="isMenuOpen = false"
           >
             Login
           </RouterLink>
           <RouterLink
             to="/register"
-            class="block w-full text-center px-4 py-2 bg-primary text-white rounded-lg font-medium hover:bg-primary/90 transition shadow-sm"
+            class="block w-full text-center px-4 py-2 bg-indigo-600 text-white rounded-lg font-medium hover:bg-indigo-700 transition shadow-sm"
             @click="isMenuOpen = false"
           >
             Register

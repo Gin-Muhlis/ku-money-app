@@ -1,8 +1,8 @@
 <template>
-  <section class="py-20 bg-base-200" id="features">
+  <section class="py-20 bg-gray-100" id="features">
     <div class="max-w-6xl mx-auto px-6">
       <div class="text-center mb-12">
-        <h2 class="text-3xl md:text-4xl font-extrabold text-neutral mb-4">Fitur Utama Ku‑Money</h2>
+        <h2 class="text-3xl md:text-4xl font-extrabold text-slate-800 mb-4">Fitur Utama Ku‑Money</h2>
         <p class="text-gray-600 max-w-2xl mx-auto">
           Semua yang kamu butuhkan untuk merencanakan, mencatat, dan mengendalikan keuangan dalam
           satu aplikasi.
@@ -13,7 +13,7 @@
         <div class="rounded-2xl bg-white p-6 shadow-sm border border-gray-100">
           <div class="flex items-start gap-4">
             <div
-              class="h-12 w-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center"
+              class="h-12 w-12 rounded-xl bg-primary/10 text-indigo-600 flex items-center justify-center"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -31,7 +31,7 @@
               </svg>
             </div>
             <div>
-              <h3 class="text-lg font-semibold text-neutral">Pencatatan Super Cepat</h3>
+              <h3 class="text-lg font-semibold text-slate-800">Pencatatan Super Cepat</h3>
               <p class="text-gray-600 mt-1">
                 Input transaksi dengan sekali ketuk, kelola kategori, dan tambahkan catatan.
               </p>
@@ -42,7 +42,7 @@
         <div class="rounded-2xl bg-white p-6 shadow-sm border border-gray-100">
           <div class="flex items-start gap-4">
             <div
-              class="h-12 w-12 rounded-xl bg-secondary/10 text-secondary flex items-center justify-center"
+              class="h-12 w-12 rounded-xl bg-amber-500/10 text-amber-500 flex items-center justify-center"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -60,7 +60,7 @@
               </svg>
             </div>
             <div>
-              <h3 class="text-lg font-semibold text-neutral">Anggaran & Target</h3>
+              <h3 class="text-lg font-semibold text-slate-800">Anggaran & Target</h3>
               <p class="text-gray-600 mt-1">
                 Tetapkan batas dan target tabungan; pantau progres setiap bulan.
               </p>
@@ -89,7 +89,7 @@
               </svg>
             </div>
             <div>
-              <h3 class="text-lg font-semibold text-neutral">Laporan & Insight</h3>
+              <h3 class="text-lg font-semibold text-slate-800">Laporan & Insight</h3>
               <p class="text-gray-600 mt-1">
                 Grafik dan ringkasan membantu memahami pola pengeluaranmu.
               </p>
@@ -116,7 +116,7 @@
               </svg>
             </div>
             <div>
-              <h3 class="text-lg font-semibold text-neutral">Sinkronisasi Perangkat</h3>
+              <h3 class="text-lg font-semibold text-slate-800">Sinkronisasi Perangkat</h3>
               <p class="text-gray-600 mt-1">Akses di ponsel atau desktop—data selalu up‑to‑date.</p>
             </div>
           </div>
@@ -143,7 +143,7 @@
               </svg>
             </div>
             <div>
-              <h3 class="text-lg font-semibold text-neutral">Kategori Fleksibel</h3>
+              <h3 class="text-lg font-semibold text-slate-800">Kategori Fleksibel</h3>
               <p class="text-gray-600 mt-1">
                 Atur kategori sesuai kebutuhanmu agar pencatatan makin rapi.
               </p>
@@ -172,7 +172,7 @@
               </svg>
             </div>
             <div>
-              <h3 class="text-lg font-semibold text-neutral">Harga Terjangkau</h3>
+              <h3 class="text-lg font-semibold text-slate-800">Harga Terjangkau</h3>
               <p class="text-gray-600 mt-1">Harga terjangkau untuk semua kalangan.</p>
             </div>
           </div>

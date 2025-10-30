@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-base-100">
+  <div class="min-h-screen bg-gray-50">
     <Navbar />
 
     <!-- Pricing Content -->
@@ -7,8 +7,8 @@
       <div class="max-w-7xl mx-auto">
         <!-- Header -->
         <div class="text-center mb-16">
-          <h1 class="text-4xl md:text-5xl font-extrabold text-neutral mb-4">
-            Pilih Paket <span class="text-primary">Terbaik</span> untuk Anda
+          <h1 class="text-4xl md:text-5xl font-extrabold text-slate-800 mb-4">
+            Pilih Paket <span class="text-indigo-600">Terbaik</span> untuk Anda
           </h1>
           <p class="text-lg text-gray-600 max-w-2xl mx-auto">
             Kelola keuangan dengan lebih mudah. Pilih paket yang sesuai dengan kebutuhan Anda.
@@ -17,7 +17,7 @@
 
         <!-- Loading State -->
         <div v-if="loading" class="flex justify-center items-center py-20">
-          <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+          <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600"></div>
         </div>
 
         <!-- Error State -->
@@ -25,7 +25,7 @@
           <p class="text-error text-lg">{{ error }}</p>
           <button
             @click="fetchPackages"
-            class="mt-4 px-6 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition"
+            class="mt-4 px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700/90 transition"
           >
             Coba Lagi
           </button>

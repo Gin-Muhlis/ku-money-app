@@ -1,8 +1,8 @@
 <template>
-  <section class="py-20 bg-base-100" id="advantages">
+  <section class="py-20 bg-gray-50" id="advantages">
     <div class="max-w-6xl mx-auto px-6">
       <div class="text-center mb-12">
-        <h2 class="text-3xl md:text-4xl font-extrabold text-neutral mb-4">Kenapa Ku‑Money?</h2>
+        <h2 class="text-3xl md:text-4xl font-extrabold text-slate-800 mb-4">Kenapa Ku‑Money?</h2>
         <p class="text-gray-600 max-w-2xl mx-auto">
           Kelola uang jadi sederhana. Ku‑Money menyatukan pencatatan, anggaran, dan insight dalam
           satu aplikasi yang cepat dan aman.
@@ -11,10 +11,10 @@
 
       <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
         <div
-          class="rounded-2xl bg-white border border-primary/10 p-6 shadow-sm hover:shadow-md transition"
+          class="rounded-2xl bg-white border border-indigo-600/10 p-6 shadow-sm hover:shadow-md transition"
         >
           <div
-            class="h-12 w-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center mb-4"
+            class="h-12 w-12 rounded-xl bg-primary/10 text-indigo-600 flex items-center justify-center mb-4"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -31,7 +31,7 @@
               />
             </svg>
           </div>
-          <h3 class="text-lg font-semibold text-neutral mb-2">Mudah & Cepat</h3>
+          <h3 class="text-lg font-semibold text-slate-800 mb-2">Mudah & Cepat</h3>
           <p class="text-gray-600">
             Catat pemasukan dan pengeluaran dalam hitungan detik dengan UI yang intuitif.
           </p>
@@ -41,7 +41,7 @@
           class="rounded-2xl bg-white border border-amber-100 p-6 shadow-sm hover:shadow-md transition"
         >
           <div
-            class="h-12 w-12 rounded-xl bg-secondary/10 text-secondary flex items-center justify-center mb-4"
+            class="h-12 w-12 rounded-xl bg-amber-500/10 text-amber-500 flex items-center justify-center mb-4"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -58,7 +58,7 @@
               />
             </svg>
           </div>
-          <h3 class="text-lg font-semibold text-neutral mb-2">Kontrol Anggaran</h3>
+          <h3 class="text-lg font-semibold text-slate-800 mb-2">Kontrol Anggaran</h3>
           <p class="text-gray-600">
             Tetapkan batasan per kategori dan pantau realisasi secara real‑time.
           </p>
@@ -85,7 +85,7 @@
               />
             </svg>
           </div>
-          <h3 class="text-lg font-semibold text-neutral mb-2">Insight Otomatis</h3>
+          <h3 class="text-lg font-semibold text-slate-800 mb-2">Insight Otomatis</h3>
           <p class="text-gray-600">
             Dapatkan ringkasan dan tren pengeluaran agar keputusan finansial lebih tepat.
           </p>
@@ -112,7 +112,7 @@
               />
             </svg>
           </div>
-          <h3 class="text-lg font-semibold text-neutral mb-2">Harga Terjangkau</h3>
+          <h3 class="text-lg font-semibold text-slate-800 mb-2">Harga Terjangkau</h3>
           <p class="text-gray-600">
             Nikmati fitur lengkap untuk mengelola keuangan tanpa khawatir biaya mahal.
           </p>
