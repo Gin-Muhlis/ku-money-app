@@ -74,7 +74,7 @@ const router = createRouter({
         {
           path: 'categories',
           name: 'categories',
-          component: () => import('@/views/pages/app/DashboardPage.vue'),
+          component: () => import('@/views/pages/app/CategoriesPage.vue'),
           meta: { title: 'Kategori' },
         },
         {
