@@ -14,34 +14,24 @@
           <!-- Form -->
           <form @submit.prevent="handleLogin" class="space-y-5">
             <!-- Email -->
-            <div>
-              <label for="email" class="block text-sm font-semibold text-slate-800 mb-2">
-                Email
-              </label>
-              <input
-                id="email"
-                v-model="form.email"
-                type="email"
-                placeholder="email@example.com"
-                class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:border-transparent transition"
-                required
-              />
-            </div>
+            <FormInput
+              id="email"
+              v-model="form.email"
+              label="Email"
+              type="email"
+              placeholder="email@example.com"
+              required
+            />
 
             <!-- Password -->
-            <div>
-              <label for="password" class="block text-sm font-semibold text-slate-800 mb-2">
-                Password
-              </label>
-              <input
-                id="password"
-                v-model="form.password"
-                type="password"
-                placeholder="Masukkan password"
-                class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:border-transparent transition"
-                required
-              />
-            </div>
+            <FormInput
+              id="password"
+              v-model="form.password"
+              label="Password"
+              type="password"
+              placeholder="Masukkan password"
+              required
+            />
 
             <!-- Forgot Password -->
             <div class="text-right">
@@ -49,12 +39,14 @@
             </div>
 
             <!-- Submit Button -->
-            <button
+            <PrimaryButton
               type="submit"
-              class="w-full bg-indigo-600 text-white py-3 rounded-xl font-semibold hover:bg-indigo-700/90 transition shadow-md hover:shadow-lg"
+              :is-loading="isLoading"
+              loading-text="Masuk..."
+              variant="rounded-xl"
             >
               Masuk
-            </button>
+            </PrimaryButton>
           </form>
 
           <!-- Register Link -->
@@ -74,19 +66,57 @@
 
 <script setup>
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+import { useAuthStore } from '@/stores/auth'
 import AuthNavbar from '@/views/components/auth/AuthNavbar.vue'
-// import { useRouter } from 'vue-router'
+import FormInput from '@/views/components/ui/FormInput.vue'
+import PrimaryButton from '@/views/components/ui/PrimaryButton.vue'
+import Swal from 'sweetalert2'
 
-// const router = useRouter()
+const router = useRouter()
+const authStore = useAuthStore()
 
 const form = ref({
   email: '',
   password: '',
 })
 
-const handleLogin = () => {
-  // TODO: Implement login logic
-  console.log('Login data:', form.value)
-  // router.push('/dashboard')
+const isLoading = ref(false)
+
+const handleLogin = async () => {
+  if (isLoading.value) return
+
+  try {
+    isLoading.value = true
+
+    // Call login API
+    const response = await authStore.login({
+      email: form.value.email,
+      password: form.value.password,
+    })
+
+    // Show success message
+    await Swal.fire({
+      icon: 'success',
+      title: 'Login Berhasil!',
+      text: `Selamat datang kembali, ${response.user.name}!`,
+      confirmButtonColor: '#4F46E5',
+      timer: 2000,
+      showConfirmButton: false,
+    })
+
+    // Redirect to dashboard
+    router.push('/app/dashboard')
+  } catch (error) {
+    console.error('Login error:', error)
+    Swal.fire({
+      icon: 'error',
+      title: 'Login Gagal',
+      text: error.message || 'Email atau password salah. Silakan coba lagi.',
+      confirmButtonColor: '#4F46E5',
+    })
+  } finally {
+    isLoading.value = false
+  }
 }
 </script>

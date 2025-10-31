@@ -1,5 +1,5 @@
 <template>
-  <footer class="bg-neutral text-base-100 mt-20">
+  <footer class="bg-indigo-950 text-white mt-20">
     <div class="max-w-6xl mx-auto px-6 py-12 grid gap-8 md:grid-cols-4">
       <div>
         <div class="text-2xl font-extrabold tracking-tight">Ku‑Money</div>
