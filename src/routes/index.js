@@ -68,7 +68,7 @@ const router = createRouter({
         {
           path: 'transactions',
           name: 'transactions',
-          component: () => import('@/views/pages/app/DashboardPage.vue'),
+          component: () => import('@/views/pages/app/TransactionsPage.vue'),
           meta: { title: 'Transaksi' },
         },
         {
