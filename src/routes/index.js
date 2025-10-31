@@ -62,7 +62,7 @@ const router = createRouter({
         {
           path: 'wallets',
           name: 'wallets',
-          component: () => import('@/views/pages/app/DashboardPage.vue'),
+          component: () => import('@/views/pages/app/WalletsPage.vue'),
           meta: { title: 'Dompet' },
         },
         {

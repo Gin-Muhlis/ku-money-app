@@ -4,7 +4,8 @@
  * @returns {string} Formatted currency string
  */
 export function formatRupiah(amount) {
-  if (amount === 0) return 'Gratis'
+  if (amount === null || amount === undefined) return 'Rp 0'
+  if (amount === 0) return 'Rp 0'
 
   return new Intl.NumberFormat('id-ID', {
     style: 'currency',
