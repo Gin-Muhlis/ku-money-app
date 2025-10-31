@@ -117,7 +117,7 @@ const menuItems = [
   { path: '/app/wallets', label: 'Dompet', icon: 'mdi mdi-wallet' },
   { path: '/app/transactions', label: 'Transaksi', icon: 'mdi mdi-swap-horizontal' },
   { path: '/app/categories', label: 'Kategori', icon: 'mdi mdi-tag-multiple' },
-  { path: '/app/reports', label: 'Laporan', icon: 'mdi mdi-chart-bar' },
+  { path: '/app/orders', label: 'Pembayaran', icon: 'mdi mdi-cash-multiple' },
   { path: '/app/subscription', label: 'Langganan', icon: 'mdi mdi-crown' },
   { path: '/app/settings', label: 'Pengaturan', icon: 'mdi mdi-cog' },
 ]
@@ -155,12 +155,6 @@ const handleLogout = async () => {
   if (result.isConfirmed) {
     await authStore.logout()
     router.push('/login')
-    Swal.fire({
-      title: 'Berhasil Logout',
-      text: 'Anda telah keluar dari akun',
-      icon: 'success',
-      confirmButtonColor: '#4F46E5',
-    })
   }
 }
 </script>

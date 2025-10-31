@@ -372,11 +372,60 @@ Mendapatkan semua paket subscription yang tersedia.
 
 ---
 
+## 📋 Subscriptions
+
+### Get User Subscription
+
+Mendapatkan subscription aktif milik user yang sedang login, termasuk expiredAt dan limit-limit yang berlaku.
+
+**Endpoint:** `GET /subscriptions`
+
+**Headers:**
+
+```
+Authorization: Bearer {accessToken}
+```
+
+**Response (200):**
+
+```json
+{
+  "subscription": {
+    "id": "507f1f77bcf86cd799439011",
+    "expiredAt": "2025-12-31T23:59:59.000Z",
+    "isActive": true,
+    "limitCategory": 50,
+    "limitIncomes": 50000000,
+    "limitExpenses": 50000000,
+    "limitAccount": 10,
+    "createdAt": "2025-10-30T12:00:00.000Z",
+    "updatedAt": "2025-10-30T12:00:00.000Z"
+  }
+}
+```
+
+**Error - No Subscription (404):**
+
+```json
+{
+  "message": "No active subscription found",
+  "code": "NO_SUBSCRIPTION"
+}
+```
+
+**Note:**
+
+- Endpoint ini mengembalikan subscription aktif berdasarkan `userId` yang diambil dari access token.
+- Field `expiredAt` menunjukkan tanggal berakhirnya subscription.
+- Jika subscription sudah expired, masih akan ditampilkan selama `isActive` bernilai `true`.
+
+---
+
 ## 💳 Orders (Xendit Integration)
 
 ### 1. Create Order
 
-Membuat order untuk upgrade subscription.
+Membuat order untuk upgrade atau extend subscription.
 
 **Endpoint:** `POST /orders/create`
 
@@ -390,6 +439,7 @@ Authorization: Bearer {accessToken}
 
 ```json
 {
+  "orderType": "upgrade",
   "packageId": "6900d9fa31210e5595e6eb89",
   "period": {
     "type": "month",
@@ -397,6 +447,16 @@ Authorization: Bearer {accessToken}
   }
 }
 ```
+
+**Body Parameters:**
+
+- `orderType` (required, string): Tipe order. Nilai yang diizinkan:
+  - `"upgrade"`: Upgrade subscription ke package baru (mengubah limit berdasarkan package + memperpanjang expiredAt)
+  - `"extends"`: Perpanjang subscription yang sudah ada (hanya memperpanjang expiredAt, limit tetap sama)
+- `packageId` (required, string): ID dari subscription package
+- `period` (required, object): Periode subscription
+  - `type` (optional, string): Tipe periode, default: `"month"`
+  - `value` (required, number): Nilai periode dalam bulan, harus salah satu dari: `1`, `3`, `6`, atau `12`
 
 **Response (201):**
 
@@ -407,9 +467,15 @@ Authorization: Bearer {accessToken}
   "amount": 90000,
   "expiresAt": "2025-10-31T12:00:00.000Z",
   "package": "pro",
-  "period": 3
+  "period": 3,
+  "orderType": "upgrade"
 }
 ```
+
+**Note:**
+
+- **Upgrade**: Ketika user melakukan upgrade (misalnya dari free ke pro atau unlimited), sistem akan mengupdate limit-limit subscription berdasarkan package yang dipilih dan memperpanjang `expiredAt` berdasarkan period yang diorder.
+- **Extends**: Ketika user melakukan extends/perpanjang, sistem hanya akan memperpanjang `expiredAt` berdasarkan period yang diorder. Limit-limit tetap sama seperti sebelumnya.
 
 ---
 
@@ -434,6 +500,7 @@ Authorization: Bearer {accessToken}
   "package": "pro",
   "amount": 90000,
   "period": 3,
+  "orderType": "upgrade",
   "checkoutUrl": "https://checkout.xendit.co/web/...",
   "expiresAt": "2025-10-31T12:00:00.000Z",
   "createdAt": "2025-10-30T12:00:00.000Z",
@@ -471,6 +538,7 @@ Authorization: Bearer {accessToken}
       "package": "pro",
       "amount": 90000,
       "period": 3,
+      "orderType": "upgrade",
       "status": "paid",
       "checkoutUrl": "https://checkout.xendit.co/web/...",
       "expiresAt": "2025-10-31T12:00:00.000Z",
@@ -488,7 +556,52 @@ Authorization: Bearer {accessToken}
 
 ---
 
-### 4. Xendit Webhook
+### 4. Get Last Order
+
+Mendapatkan order terakhir yang dibuat oleh user yang sedang login.
+
+**Endpoint:** `GET /orders/last`
+
+**Headers:**
+
+```
+Authorization: Bearer {accessToken}
+```
+
+**Response (200):**
+
+```json
+{
+  "transactionId": "550e8400-e29b-41d4-a716-446655440000",
+  "status": "paid",
+  "package": "pro",
+  "amount": 90000,
+  "period": 3,
+  "orderType": "upgrade",
+  "checkoutUrl": "https://checkout.xendit.co/web/...",
+  "expiresAt": "2025-10-31T12:00:00.000Z",
+  "createdAt": "2025-10-30T12:00:00.000Z",
+  "paymentMethod": "VIRTUAL_ACCOUNT"
+}
+```
+
+**Error - Order Not Found (404):**
+
+```json
+{
+  "message": "No order found",
+  "code": "ORDER_NOT_FOUND"
+}
+```
+
+**Note:**
+
+- Endpoint ini mengembalikan order terakhir berdasarkan `createdAt` (order terbaru).
+- Order diurutkan dari yang terbaru ke yang terlama.
+
+---
+
+### 5. Xendit Webhook
 
 Endpoint untuk menerima payment notification dari Xendit (tidak perlu auth).
 

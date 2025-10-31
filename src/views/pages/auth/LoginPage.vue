@@ -90,21 +90,10 @@ const handleLogin = async () => {
     isLoading.value = true
 
     // Call login API
-    const response = await authStore.login({
+    await authStore.login({
       email: form.value.email,
       password: form.value.password,
     })
-
-    // Show success message
-    await Swal.fire({
-      icon: 'success',
-      title: 'Login Berhasil!',
-      text: `Selamat datang kembali, ${response.user.name}!`,
-      confirmButtonColor: '#4F46E5',
-      timer: 2000,
-      showConfirmButton: false,
-    })
-
     // Redirect to dashboard
     router.push('/app/dashboard')
   } catch (error) {

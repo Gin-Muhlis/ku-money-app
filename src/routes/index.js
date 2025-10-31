@@ -21,6 +21,18 @@ const router = createRouter({
       component: () => import('@/views/pages/PricingPage.vue'),
     },
 
+    // Payment Pages
+    {
+      path: '/payment/success',
+      name: 'payment-success',
+      component: () => import('@/views/pages/payment/PaymentSuccessPage.vue'),
+    },
+    {
+      path: '/payment/failed',
+      name: 'payment-failed',
+      component: () => import('@/views/pages/payment/PaymentFailedPage.vue'),
+    },
+
     // Auth Pages
     {
       path: '/login',
@@ -84,9 +96,15 @@ const router = createRouter({
           meta: { title: 'Laporan' },
         },
         {
+          path: 'orders',
+          name: 'orders',
+          component: () => import('@/views/pages/app/OrdersPage.vue'),
+          meta: { title: 'Pembayaran' },
+        },
+        {
           path: 'subscription',
           name: 'subscription',
-          component: () => import('@/views/pages/app/DashboardPage.vue'),
+          component: () => import('@/views/pages/app/SubscriptionPage.vue'),
           meta: { title: 'Langganan' },
         },
         {

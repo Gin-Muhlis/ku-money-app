@@ -93,6 +93,13 @@ export const useAuthStore = defineStore('auth', () => {
     return response
   }
 
+  const updateUser = (userData) => {
+    if (userData) {
+      user.value = { ...user.value, ...userData }
+      localStorage.setItem('user', JSON.stringify(user.value))
+    }
+  }
+
   return {
     user,
     accessToken,
@@ -109,5 +116,6 @@ export const useAuthStore = defineStore('auth', () => {
     verifyEmail,
     resendVerification,
     refreshAccessToken,
+    updateUser,
   }
 })
