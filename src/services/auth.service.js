@@ -83,3 +83,17 @@ export async function logout(refreshToken) {
     throw error.response?.data || error
   }
 }
+
+/**
+ * Update password
+ * @param {Object} data - { oldPassword, newPassword }
+ * @returns {Promise}
+ */
+export async function updatePassword(data) {
+  try {
+    const response = await axios.put('/api/auth/password', data)
+    return response.data
+  } catch (error) {
+    throw error.response?.data || error
+  }
+}

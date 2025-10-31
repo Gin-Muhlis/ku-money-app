@@ -258,6 +258,69 @@ Kirim ulang email verifikasi.
 
 ---
 
+### 7. Update Password
+
+Update password user (memerlukan password lama untuk verifikasi).
+
+**Endpoint:** `PUT /auth/password`
+
+**Headers:**
+
+```
+Authorization: Bearer {accessToken}
+```
+
+**Body:**
+
+```json
+{
+  "oldPassword": "password123",
+  "newPassword": "newPassword456"
+}
+```
+
+**Response (200):**
+
+```json
+{
+  "message": "Password updated successfully"
+}
+```
+
+**Error - Wrong Old Password (400):**
+
+```json
+{
+  "message": "Old password is incorrect",
+  "code": "INVALID_OLD_PASSWORD"
+}
+```
+
+**Error - Same Password (400):**
+
+```json
+{
+  "message": "New password must be different from old password",
+  "code": "SAME_PASSWORD"
+}
+```
+
+**Error - Validation (400):**
+
+```json
+{
+  "message": "Validation error",
+  "details": [
+    {
+      "field": "newPassword",
+      "message": "New password must be at least 6 characters"
+    }
+  ]
+}
+```
+
+---
+
 ## 📦 Subscription Packages
 
 ### Get All Packages
@@ -537,6 +600,7 @@ Authorization: Bearer {accessToken}
       "title": "Gaji",
       "icon": "💰",
       "type": "incomes",
+      "amount": 5000000,
       "createdAt": "2025-10-30T12:00:00.000Z"
     },
     {
@@ -544,12 +608,17 @@ Authorization: Bearer {accessToken}
       "title": "Makanan",
       "icon": "🍔",
       "type": "expenses",
+      "amount": 500000,
       "createdAt": "2025-10-30T12:00:00.000Z"
     }
   ],
   "total": 2
 }
 ```
+
+**Note:**
+
+- `amount` (number): Total jumlah transaksi (pemasukan/pengeluaran) dari category tersebut. Akan bernilai `0` jika belum ada transaksi.
 
 ---
 
@@ -1224,19 +1293,29 @@ Authorization: Bearer {accessToken}
 
 ## 🔑 Error Codes
 
-| Code                        | Description                   |
-| --------------------------- | ----------------------------- |
-| `NO_TOKEN`                  | Access token tidak ditemukan  |
-| `INVALID_FORMAT`            | Format token tidak valid      |
-| `TOKEN_EXPIRED`             | Token sudah expired           |
-| `INVALID_TOKEN`             | Token tidak valid             |
-| `NO_REFRESH_TOKEN`          | Refresh token tidak ditemukan |
-| `REFRESH_TOKEN_EXPIRED`     | Refresh token expired         |
-| `CATEGORY_LIMIT_REACHED`    | Limit category tercapai       |
-| `ACCOUNT_LIMIT_REACHED`     | Limit account tercapai        |
-| `TRANSACTION_LIMIT_REACHED` | Limit transaction tercapai    |
-| `XENDIT_ERROR`              | Error dari Xendit API         |
-| `INTERNAL_ERROR`            | Internal server error         |
+| Code                            | Description                   |
+| ------------------------------- | ----------------------------- |
+| `NO_TOKEN`                      | Access token tidak ditemukan  |
+| `INVALID_FORMAT`                | Format token tidak valid      |
+| `TOKEN_EXPIRED`                 | Token sudah expired           |
+| `INVALID_TOKEN`                 | Token tidak valid             |
+| `NO_REFRESH_TOKEN`              | Refresh token tidak ditemukan |
+| `REFRESH_TOKEN_EXPIRED`         | Refresh token expired         |
+| `CATEGORY_LIMIT_REACHED`        | Limit category tercapai       |
+| `ACCOUNT_LIMIT_REACHED`         | Limit account tercapai        |
+| `ACCOUNT_BALANCE_LIMIT_REACHED` | Total balance limit tercapai  |
+| `TRANSACTION_LIMIT_REACHED`     | Limit transaction tercapai    |
+| `INVALID_OLD_PASSWORD`          | Old password salah            |
+| `SAME_PASSWORD`                 | New password sama dengan old  |
+| `USER_NOT_FOUND`                | User tidak ditemukan          |
+| `ACCOUNT_NOT_FOUND`             | Account tidak ditemukan       |
+| `CATEGORY_NOT_FOUND`            | Category tidak ditemukan      |
+| `TRANSACTION_NOT_FOUND`         | Transaction tidak ditemukan   |
+| `ORDER_NOT_FOUND`               | Order tidak ditemukan         |
+| `PACKAGE_NOT_FOUND`             | Package tidak ditemukan       |
+| `NO_SUBSCRIPTION`               | Tidak ada subscription aktif  |
+| `XENDIT_ERROR`                  | Error dari Xendit API         |
+| `INTERNAL_ERROR`                | Internal server error         |
 
 ---
 

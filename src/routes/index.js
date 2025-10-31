@@ -92,7 +92,7 @@ const router = createRouter({
         {
           path: 'settings',
           name: 'settings',
-          component: () => import('@/views/pages/app/DashboardPage.vue'),
+          component: () => import('@/views/pages/app/SettingsPage.vue'),
           meta: { title: 'Pengaturan' },
         },
       ],
