@@ -91,12 +91,6 @@ const router = createRouter({
           meta: { title: 'Kategori' },
         },
         {
-          path: 'reports',
-          name: 'reports',
-          component: () => import('@/views/pages/app/DashboardPage.vue'),
-          meta: { title: 'Laporan' },
-        },
-        {
           path: 'orders',
           name: 'orders',
           component: () => import('@/views/pages/app/OrdersPage.vue'),
