@@ -43,31 +43,13 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
-import { getPackages } from '@/services/package.service'
+import { onMounted } from 'vue'
+import { usePackages } from '@/composables/usePackages'
 import Navbar from '@/views/components/landing/Navbar.vue'
 import Footer from '@/views/components/landing/Footer.vue'
 import PricingCard from '@/views/components/pricing/PricingCard.vue'
 
-const packages = ref([])
-const loading = ref(true)
-const error = ref(null)
-
-// Fetch packages from API
-const fetchPackages = async () => {
-  loading.value = true
-  error.value = null
-
-  try {
-    const response = await getPackages()
-    packages.value = response.data || []
-  } catch (err) {
-    error.value = 'Gagal memuat data paket. Silakan coba lagi.'
-    console.error('Error fetching packages:', err)
-  } finally {
-    loading.value = false
-  }
-}
+const { packages, loading, error, fetchPackages } = usePackages()
 
 onMounted(() => {
   fetchPackages()

@@ -97,3 +97,16 @@ export async function updatePassword(data) {
     throw error.response?.data || error
   }
 }
+
+/**
+ * Get current user data
+ * @returns {Promise}
+ */
+export async function getMe() {
+  try {
+    const response = await axios.get('/api/auth/me')
+    return response.data
+  } catch (error) {
+    throw error.response?.data || error
+  }
+}

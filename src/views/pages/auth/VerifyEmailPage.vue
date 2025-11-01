@@ -1,5 +1,7 @@
 <template>
-  <div class="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50 flex items-center justify-center p-6">
+  <div
+    class="min-h-screen bg-linear-to-br from-indigo-50 via-white to-purple-50 flex items-center justify-center p-6"
+  >
     <div class="w-full max-w-md">
       <!-- Logo -->
       <div class="text-center mb-8">
@@ -9,7 +11,9 @@
       <!-- Card -->
       <div class="bg-white rounded-2xl shadow-xl p-8">
         <div class="text-center mb-6">
-          <div class="w-20 h-20 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-4">
+          <div
+            class="w-20 h-20 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-4"
+          >
             <i class="mdi mdi-email-check text-4xl text-indigo-600"></i>
           </div>
           <h2 class="text-2xl font-bold text-gray-800 mb-2">Verifikasi Email</h2>
@@ -36,9 +40,7 @@
             <i class="mdi mdi-loading mdi-spin mr-2"></i>
             Mengirim ulang...
           </span>
-          <span v-else-if="countdown > 0">
-            Kirim ulang dalam {{ countdown }}s
-          </span>
+          <span v-else-if="countdown > 0"> Kirim ulang dalam {{ countdown }}s </span>
           <span v-else>
             <i class="mdi mdi-email-sync mr-2"></i>
             Kirim Ulang Email
@@ -60,7 +62,10 @@
       <div class="text-center mt-6">
         <p class="text-sm text-gray-600">
           Tidak menerima email?
-          <a href="mailto:support@kumoney.com" class="text-indigo-600 hover:text-indigo-700 font-semibold">
+          <a
+            href="mailto:support@kumoney.com"
+            class="text-indigo-600 hover:text-indigo-700 font-semibold"
+          >
             Hubungi Support
           </a>
         </p>
@@ -71,17 +76,22 @@
 
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
 import Swal from 'sweetalert2'
 import LogoBrand from '@/views/components/ui/LogoBrand.vue'
 
+const router = useRouter()
+const route = useRoute()
 const authStore = useAuthStore()
 
 const isLoading = ref(false)
 const countdown = ref(0)
 let countdownInterval = null
 
-const userEmail = computed(() => authStore.user?.email || localStorage.getItem('pendingEmail') || '')
+const userEmail = computed(
+  () => authStore.user?.email || localStorage.getItem('pendingEmail') || '',
+)
 
 const handleResend = async () => {
   if (countdown.value > 0 || isLoading.value) return
@@ -123,7 +133,33 @@ const startCountdown = () => {
   }, 1000)
 }
 
-onMounted(() => {
+const checkUserVerificationStatus = async () => {
+  // Load auth from storage first
+  authStore.loadFromStorage()
+
+  // If user is authenticated, check verification status
+  if (authStore.isAuthenticated) {
+    try {
+      // Fetch latest user data from API
+      await authStore.getMe()
+
+      // Check if user is now verified
+      if (authStore.isVerified) {
+        // Redirect to dashboard
+        const redirectPath = route.query.redirect || '/app/dashboard'
+        router.push(redirectPath)
+      }
+    } catch (error) {
+      // If error (e.g., token expired), ignore and continue
+      console.error('Error checking user status:', error)
+    }
+  }
+}
+
+onMounted(async () => {
+  // Check user verification status on mount/refresh
+  await checkUserVerificationStatus()
+
   // Check if email exists
   if (!userEmail.value) {
     Swal.fire({
@@ -143,4 +179,3 @@ onUnmounted(() => {
   }
 })
 </script>
-

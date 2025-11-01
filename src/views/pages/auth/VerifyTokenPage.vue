@@ -1,5 +1,7 @@
 <template>
-  <div class="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50 flex items-center justify-center p-6">
+  <div
+    class="min-h-screen bg-linear-to-br from-indigo-50 via-white to-purple-50 flex items-center justify-center p-6"
+  >
     <div class="w-full max-w-md">
       <!-- Logo -->
       <div class="text-center mb-8">
@@ -25,7 +27,8 @@
         icon-bg-color="bg-green-100"
         icon-color="text-green-600"
       >
-        Akun Anda telah berhasil diaktifkan dengan status <span class="font-bold text-indigo-600">FREE</span>
+        Akun Anda telah berhasil diaktifkan dengan status
+        <span class="font-bold text-indigo-600">FREE</span>
         <template #actions>
           <RouterLink
             to="/app/dashboard"
@@ -93,9 +96,12 @@ onMounted(async () => {
   try {
     // Verify email
     await authStore.verifyEmail(token)
-    
+
     isVerifying.value = false
     verificationSuccess.value = true
+
+    // Get redirect path from query or default to dashboard
+    const redirectPath = route.query.redirect || '/app/dashboard'
 
     // Show success alert
     await Swal.fire({
@@ -109,8 +115,8 @@ onMounted(async () => {
       confirmButtonText: 'Lanjut ke Dashboard',
     })
 
-    // Redirect to dashboard
-    router.push('/app/dashboard')
+    // Redirect to intended page or dashboard
+    router.push(redirectPath)
   } catch (error) {
     isVerifying.value = false
     verificationSuccess.value = false
@@ -118,4 +124,3 @@ onMounted(async () => {
   }
 })
 </script>
-

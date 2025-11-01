@@ -71,15 +71,10 @@
 
 <script setup>
 import { ref } from 'vue'
-import { useRouter } from 'vue-router'
-import { useAuthStore } from '@/stores/auth'
+import { useAuth } from '@/composables/useAuth'
 import AuthNavbar from '@/views/components/auth/AuthNavbar.vue'
 import FormInput from '@/views/components/ui/FormInput.vue'
 import PrimaryButton from '@/views/components/ui/PrimaryButton.vue'
-import Swal from 'sweetalert2'
-
-const router = useRouter()
-const authStore = useAuthStore()
 
 const form = ref({
   name: '',
@@ -87,44 +82,9 @@ const form = ref({
   password: '',
 })
 
-const isLoading = ref(false)
+const { isLoading, handleRegister: handleRegisterAuth } = useAuth()
 
 const handleRegister = async () => {
-  if (isLoading.value) return
-
-  try {
-    isLoading.value = true
-
-    // Call register API
-    await authStore.register({
-      name: form.value.name,
-      email: form.value.email,
-      password: form.value.password,
-    })
-
-    // Save email to localStorage for verification page
-    localStorage.setItem('pendingEmail', form.value.email)
-
-    // Show success message
-    await Swal.fire({
-      icon: 'success',
-      title: 'Registrasi Berhasil!',
-      text: 'Silakan cek email Anda untuk verifikasi akun',
-      confirmButtonColor: '#4F46E5',
-    })
-
-    // Redirect to verify email page
-    router.push('/verify-email')
-  } catch (error) {
-    console.error('Register error:', error)
-    Swal.fire({
-      icon: 'error',
-      title: 'Registrasi Gagal',
-      text: error.message || 'Terjadi kesalahan saat mendaftar. Silakan coba lagi.',
-      confirmButtonColor: '#4F46E5',
-    })
-  } finally {
-    isLoading.value = false
-  }
+  await handleRegisterAuth(form.value)
 }
 </script>

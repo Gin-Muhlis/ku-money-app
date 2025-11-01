@@ -100,6 +100,15 @@ export const useAuthStore = defineStore('auth', () => {
     }
   }
 
+  const getMe = async () => {
+    const response = await authService.getMe()
+    if (response.user) {
+      user.value = response.user
+      localStorage.setItem('user', JSON.stringify(user.value))
+    }
+    return response
+  }
+
   return {
     user,
     accessToken,
@@ -117,5 +126,6 @@ export const useAuthStore = defineStore('auth', () => {
     resendVerification,
     refreshAccessToken,
     updateUser,
+    getMe,
   }
 })

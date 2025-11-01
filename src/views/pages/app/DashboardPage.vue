@@ -1,87 +1,44 @@
 <template>
   <div>
     <!-- Welcome Section -->
-    <div class="mb-6">
-      <h2 class="text-2xl font-bold text-gray-800">Selamat Datang, {{ userName }}! 👋</h2>
-      <p class="text-gray-600 mt-1">Ringkasan keuangan Anda hari ini</p>
+    <div class="mb-6 flex items-center justify-between flex-wrap gap-4">
+      <div>
+        <h2 class="text-2xl font-bold text-gray-800">Selamat Datang, {{ userName }}! 👋</h2>
+        <p class="text-gray-600 mt-1">Ringkasan keuangan Anda</p>
+      </div>
+
+      <!-- Filters -->
+      <DashboardFilters
+        :accounts="accounts"
+        :selected-account-id="selectedAccountId"
+        :selected-date-filter="selectedDateFilter"
+        :custom-start-date="customStartDate"
+        :custom-end-date="customEndDate"
+        @update:selected-account-id="selectedAccountId = $event"
+        @update:selected-date-filter="selectedDateFilter = $event"
+        @update:custom-start-date="customStartDate = $event"
+        @update:custom-end-date="customEndDate = $event"
+        @filter-change="refreshDashboardData"
+      />
     </div>
 
     <!-- Stats Cards -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
-      <!-- Total Balance -->
-      <StatCard
-        label="Total Saldo"
-        value="Rp 0"
-        icon="mdi mdi-wallet"
-        icon-bg-color="bg-indigo-100"
-        icon-color="text-indigo-600"
-      />
-
-      <!-- Income -->
-      <StatCard
-        label="Pemasukan Bulan Ini"
-        value="Rp 0"
-        icon="mdi mdi-trending-up"
-        icon-bg-color="bg-green-100"
-        icon-color="text-green-600"
-        value-color="text-green-600"
-      />
-
-      <!-- Expense -->
-      <StatCard
-        label="Pengeluaran Bulan Ini"
-        value="Rp 0"
-        icon="mdi mdi-trending-down"
-        icon-bg-color="bg-red-100"
-        icon-color="text-red-600"
-        value-color="text-red-600"
-      />
-
-      <!-- Transactions -->
-      <StatCard
-        label="Total Transaksi"
-        value="0"
-        icon="mdi mdi-swap-horizontal"
-        icon-bg-color="bg-amber-100"
-        icon-color="text-amber-600"
-      />
+    <div class="mb-6">
+      <DashboardStats :summary="summary" />
     </div>
 
     <!-- Charts Row -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-      <!-- Expense by Category -->
-      <div class="bg-white rounded-xl p-6 border border-gray-200">
-        <h3 class="text-lg font-semibold text-gray-800 mb-4">Pengeluaran per Kategori</h3>
-        <EmptyState icon="mdi mdi-chart-pie" message="Belum ada data" />
-      </div>
-
-      <!-- Income vs Expense -->
-      <div class="bg-white rounded-xl p-6 border border-gray-200">
-        <h3 class="text-lg font-semibold text-gray-800 mb-4">Pemasukan vs Pengeluaran</h3>
-        <EmptyState icon="mdi mdi-chart-bar" message="Belum ada data" />
-      </div>
+      <ExpenseByCategoryChart :data="expensesByCategory" :is-loading="isLoadingExpenses" />
+      <IncomeVsExpenseChart :data="incomeVsExpenses" :is-loading="isLoadingIncomeVsExpenses" />
     </div>
 
     <!-- Recent Transactions -->
-    <div class="bg-white rounded-xl p-6 border border-gray-200">
-      <div class="flex items-center justify-between mb-4">
-        <h3 class="text-lg font-semibold text-gray-800">Transaksi Terbaru</h3>
-        <RouterLink
-          to="/app/transactions"
-          class="text-sm text-indigo-600 hover:text-indigo-700 font-medium"
-        >
-          Lihat Semua →
-        </RouterLink>
-      </div>
-
-      <EmptyState icon="mdi mdi-file-document-outline" message="Belum ada transaksi">
-        <RouterLink
-          to="/app/transactions"
-          class="mt-3 inline-block text-sm text-indigo-600 hover:text-indigo-700 font-medium"
-        >
-          Tambah Transaksi
-        </RouterLink>
-      </EmptyState>
+    <div class="mb-6">
+      <RecentTransactionsSection
+        :transactions="recentTransactions"
+        :is-loading="isLoadingTransactions"
+      />
     </div>
 
     <!-- Quick Actions -->
@@ -119,12 +76,53 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { computed, onMounted, onBeforeUnmount } from 'vue'
 import { useAuthStore } from '@/stores/auth'
-import StatCard from '@/views/components/ui/StatCard.vue'
-import EmptyState from '@/views/components/ui/EmptyState.vue'
+import { useDashboardFilters } from '@/composables/useDashboardFilters'
+import { useDashboardData } from '@/composables/useDashboardData'
+import DashboardFilters from '@/views/components/dashboard/DashboardFilters.vue'
+import DashboardStats from '@/views/components/dashboard/DashboardStats.vue'
+import ExpenseByCategoryChart from '@/views/components/dashboard/ExpenseByCategoryChart.vue'
+import IncomeVsExpenseChart from '@/views/components/dashboard/IncomeVsExpenseChart.vue'
+import RecentTransactionsSection from '@/views/components/dashboard/RecentTransactionsSection.vue'
 
 const authStore = useAuthStore()
-
 const userName = computed(() => authStore.user?.name || 'User')
+
+// Use composables
+const {
+  selectedDateFilter,
+  selectedAccountId,
+  customStartDate,
+  customEndDate,
+  dateRange,
+  resetFilters,
+} = useDashboardFilters()
+
+const {
+  summary,
+  expensesByCategory,
+  incomeVsExpenses,
+  recentTransactions,
+  accounts,
+  fetchAccounts,
+  refreshDashboardData,
+  fetchAllData,
+} = useDashboardData(dateRange, selectedAccountId)
+
+// Reset filter to default when component is mounted
+onMounted(async () => {
+  resetFilters()
+
+  // Fetch accounts first
+  await fetchAccounts()
+
+  // Then fetch all dashboard data
+  await fetchAllData()
+})
+
+// Reset filter when leaving the page
+onBeforeUnmount(() => {
+  resetFilters()
+})
 </script>

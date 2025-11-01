@@ -110,9 +110,9 @@ const props = defineProps({
     default: false,
   },
   orderType: {
-    type: String,
-    required: true,
-    validator: (value) => ['upgrade', 'extends'].includes(value),
+    type: [String, null],
+    default: null,
+    validator: (value) => !value || ['upgrade', 'extends'].includes(value),
   },
   packageData: {
     type: Object,

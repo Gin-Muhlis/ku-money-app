@@ -66,46 +66,19 @@
 
 <script setup>
 import { ref } from 'vue'
-import { useRouter } from 'vue-router'
-import { useAuthStore } from '@/stores/auth'
+import { useAuth } from '@/composables/useAuth'
 import AuthNavbar from '@/views/components/auth/AuthNavbar.vue'
 import FormInput from '@/views/components/ui/FormInput.vue'
 import PrimaryButton from '@/views/components/ui/PrimaryButton.vue'
-import Swal from 'sweetalert2'
-
-const router = useRouter()
-const authStore = useAuthStore()
 
 const form = ref({
   email: '',
   password: '',
 })
 
-const isLoading = ref(false)
+const { isLoading, handleLogin: handleLoginAuth } = useAuth()
 
 const handleLogin = async () => {
-  if (isLoading.value) return
-
-  try {
-    isLoading.value = true
-
-    // Call login API
-    await authStore.login({
-      email: form.value.email,
-      password: form.value.password,
-    })
-    // Redirect to dashboard
-    router.push('/app/dashboard')
-  } catch (error) {
-    console.error('Login error:', error)
-    Swal.fire({
-      icon: 'error',
-      title: 'Login Gagal',
-      text: error.message || 'Email atau password salah. Silakan coba lagi.',
-      confirmButtonColor: '#4F46E5',
-    })
-  } finally {
-    isLoading.value = false
-  }
+  await handleLoginAuth(form.value)
 }
 </script>

@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
+import { getExpiredStatus } from '@/services/subscription.service'
 
 const router = createRouter({
   history: createWebHistory(),
@@ -125,7 +126,7 @@ const router = createRouter({
 })
 
 // Navigation Guard
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
   const authStore = useAuthStore()
 
   // Load auth from localStorage on first load
@@ -141,15 +142,56 @@ router.beforeEach((to, from, next) => {
         path: '/login',
         query: { redirect: to.fullPath },
       })
+    } else if (!authStore.isVerified) {
+      // Authenticated but not verified, redirect to verify email
+      // Allow access to verify-email and verify-token pages
+      if (to.name === 'verify-email' || to.name === 'verify-token') {
+        next()
+      } else {
+        next({
+          path: '/verify-email',
+          query: { redirect: to.fullPath },
+        })
+      }
     } else {
+      // Check subscription expired status (skip for subscription and orders pages)
+      const allowedRoutesWithoutExpiredCheck = ['subscription', 'orders']
+      if (!allowedRoutesWithoutExpiredCheck.includes(to.name)) {
+        // Check expired status
+        try {
+          const expiredStatus = await getExpiredStatus()
+          if (expiredStatus.isExpired) {
+            // Subscription expired, redirect to subscription page
+            next({
+              path: '/app/subscription',
+              query: { expired: 'true', redirect: to.fullPath },
+            })
+            return
+          }
+        } catch (error) {
+          // If error (e.g., no subscription), allow access for free users
+          // Only block if it's a clear expired status error
+          if (error.code !== 'NO_SUBSCRIPTION') {
+            console.error('Error checking expired status:', error)
+          }
+        }
+      }
       next()
     }
   }
   // Check if route is for guests only (login, register)
   else if (to.matched.some((record) => record.meta.guest)) {
     if (authStore.isAuthenticated) {
-      // Already authenticated, redirect to dashboard
-      next('/app/dashboard')
+      // If authenticated but not verified, allow access to verify pages
+      if (to.name === 'verify-email' || to.name === 'verify-token') {
+        next()
+      } else if (!authStore.isVerified) {
+        // Not verified, redirect to verify email
+        next('/verify-email')
+      } else {
+        // Already authenticated and verified, redirect to dashboard
+        next('/app/dashboard')
+      }
     } else {
       next()
     }
