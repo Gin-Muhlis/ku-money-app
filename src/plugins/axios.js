@@ -6,8 +6,8 @@ const instance = axios.create({
   baseURL: import.meta.env.VITE_BASE_URL || 'http://localhost:3000/api',
   headers: {
     'Content-Type': 'application/json',
-    'ngrok-skip-browser-warning': 'true', // Skip ngrok warning page
   },
+  withCredentials: true, // Required for CORS with credentials
 })
 
 // Flag to prevent multiple refresh token requests
@@ -76,11 +76,8 @@ instance.interceptors.response.use(
       }
 
       try {
-        // Call refresh token endpoint
-        const response = await axios.post(
-          `${import.meta.env.VITE_BASE_URL || 'http://localhost:3000/api'}/auth/refresh`,
-          { refreshToken },
-        )
+        // Call refresh token endpoint using instance to maintain withCredentials
+        const response = await instance.post('/auth/refresh', { refreshToken })
 
         const { accessToken, refreshToken: newRefreshToken, user } = response.data
 
