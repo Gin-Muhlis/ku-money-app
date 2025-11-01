@@ -145,6 +145,7 @@
 <script setup>
 import { onMounted, onUnmounted } from 'vue'
 import { useTransactions } from '@/composables/useTransactions'
+import { formatRupiah } from '@/helpers/formatCurrency'
 import TransactionItem from '@/views/components/ui/TransactionItem.vue'
 import TransactionModal from '@/views/components/ui/TransactionModal.vue'
 
