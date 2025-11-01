@@ -122,6 +122,13 @@ const router = createRouter({
       path: '/app',
       redirect: '/app/dashboard',
     },
+
+    // Catch all - 404 Not Found (must be last)
+    {
+      path: '/:pathMatch(.*)*',
+      name: 'not-found',
+      component: () => import('@/views/pages/NotFoundPage.vue'),
+    },
   ],
 })
 

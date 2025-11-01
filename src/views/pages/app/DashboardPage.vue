@@ -40,38 +40,6 @@
         :is-loading="isLoadingTransactions"
       />
     </div>
-
-    <!-- Quick Actions -->
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
-      <button
-        class="p-4 bg-white rounded-xl border border-gray-200 hover:border-indigo-300 hover:shadow-md transition text-center"
-      >
-        <i class="mdi mdi-plus-circle text-3xl text-indigo-600 mb-2"></i>
-        <p class="text-sm font-medium text-gray-700">Tambah Transaksi</p>
-      </button>
-
-      <button
-        class="p-4 bg-white rounded-xl border border-gray-200 hover:border-indigo-300 hover:shadow-md transition text-center"
-      >
-        <i class="mdi mdi-wallet-plus text-3xl text-indigo-600 mb-2"></i>
-        <p class="text-sm font-medium text-gray-700">Tambah Akun</p>
-      </button>
-
-      <button
-        class="p-4 bg-white rounded-xl border border-gray-200 hover:border-indigo-300 hover:shadow-md transition text-center"
-      >
-        <i class="mdi mdi-tag-plus text-3xl text-indigo-600 mb-2"></i>
-        <p class="text-sm font-medium text-gray-700">Tambah Kategori</p>
-      </button>
-
-      <RouterLink
-        to="/app/reports"
-        class="p-4 bg-white rounded-xl border border-gray-200 hover:border-indigo-300 hover:shadow-md transition text-center"
-      >
-        <i class="mdi mdi-file-chart text-3xl text-indigo-600 mb-2"></i>
-        <p class="text-sm font-medium text-gray-700">Lihat Laporan</p>
-      </RouterLink>
-    </div>
   </div>
 </template>
 

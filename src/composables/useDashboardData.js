@@ -104,8 +104,10 @@ export function useDashboardData(dateRange, selectedAccountId) {
     isLoadingTransactions.value = true
     try {
       const params = {
-        limit: 5,
+        limit: 10,
         page: 1,
+        fromDate: dateRangeRef.value.fromDate,
+        toDate: dateRangeRef.value.toDate,
       }
       if (selectedAccountIdRef.value) {
         params.accountId = selectedAccountIdRef.value
@@ -122,7 +124,12 @@ export function useDashboardData(dateRange, selectedAccountId) {
 
   // Refresh all dashboard data
   const refreshDashboardData = async () => {
-    await Promise.all([fetchDashboardData(), fetchExpensesByCategory(), fetchIncomeVsExpenses()])
+    await Promise.all([
+      fetchDashboardData(),
+      fetchExpensesByCategory(),
+      fetchIncomeVsExpenses(),
+      fetchRecentTransactions(),
+    ])
   }
 
   // Fetch all data
