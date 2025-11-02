@@ -78,7 +78,6 @@ import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { getOrderStatus } from '@/services/order.service'
 import { formatRupiah } from '@/helpers/formatCurrency'
-import Swal from 'sweetalert2'
 
 const route = useRoute()
 
@@ -154,4 +153,3 @@ onMounted(() => {
   fetchOrderStatus()
 })
 </script>
-

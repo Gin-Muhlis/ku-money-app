@@ -131,7 +131,6 @@ import CategoryModal from '@/views/components/ui/CategoryModal.vue'
 
 const {
   activeTab,
-  categories,
   isLoading,
   isSubmitting,
   showModal,

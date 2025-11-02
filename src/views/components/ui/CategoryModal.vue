@@ -28,14 +28,12 @@
         <!-- Type Selector (only for create, disabled for edit) -->
         <div>
           <label class="block text-sm font-semibold text-slate-800 mb-2"> Tipe Kategori </label>
-          <select
+          <CustomSelect
             v-model="form.type"
+            :options="categoryTypeOptions"
             :disabled="isEdit"
-            class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:border-transparent transition disabled:bg-gray-100 disabled:cursor-not-allowed"
-          >
-            <option value="incomes">Pemasukan</option>
-            <option value="expenses">Pengeluaran</option>
-          </select>
+            placeholder="Pilih Tipe Kategori"
+          />
           <p v-if="isEdit" class="text-xs text-gray-500 mt-1">
             Tipe kategori tidak dapat diubah setelah dibuat
           </p>
@@ -123,6 +121,7 @@
 import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
 import FormInput from './FormInput.vue'
 import PrimaryButton from './PrimaryButton.vue'
+import CustomSelect from './CustomSelect.vue'
 import { walletIcons } from '@/helpers/walletIcons'
 
 const props = defineProps({
@@ -159,6 +158,11 @@ const form = ref({
 
 const showIconPicker = ref(false)
 const iconSearch = ref('')
+
+const categoryTypeOptions = [
+  { label: 'Pemasukan', value: 'incomes' },
+  { label: 'Pengeluaran', value: 'expenses' },
+]
 
 // Filter icons based on search query
 const filteredIcons = computed(() => {

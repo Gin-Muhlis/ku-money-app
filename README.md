@@ -89,6 +89,16 @@ KU-Money adalah aplikasi web modern yang memungkinkan pengguna untuk mengelola k
 - ✅ SweetAlert2 untuk notifications
 - ✅ AOS (Animate On Scroll) untuk landing page
 - ✅ Material Design Icons
+- ✅ Custom Select Component dengan searchable dan disabled state
+
+### 📱 Progressive Web App (PWA)
+
+- ✅ Installable sebagai aplikasi mobile
+- ✅ Offline support dengan Service Worker
+- ✅ App-like experience dengan standalone display
+- ✅ Automatic updates dengan autoUpdate
+- ✅ Cache strategies untuk assets dan resources
+- ✅ Optimized untuk mobile devices
 
 ### 🛡️ Security Features
 
@@ -135,6 +145,11 @@ KU-Money adalah aplikasi web modern yang memungkinkan pengguna untuk mengelola k
 - **[AOS 2.3.4](https://michalsnik.github.io/aos/)** - Animate On Scroll library
 - **[Vue i18n 11.1.12](https://vue-i18n.intlify.dev/)** - Internationalization plugin
 - **[Vue Dragscroll 4.0.6](https://github.com/donnikitos/vue-dragscroll)** - Drag scrolling functionality
+
+### PWA & Offline
+
+- **[Vite PWA Plugin](https://vite-pwa-org.netlify.app/)** - Progressive Web App support dengan Workbox
+- **Service Worker** - Offline capabilities dan caching strategies
 
 ### Development Tools
 
@@ -358,6 +373,112 @@ Untuk preview build production secara lokal sebelum deploy.
 2. Build aplikasi: `npm run build`
 3. Deploy folder `dist/` ke hosting (Vercel, Netlify, dll)
 4. Pastikan backend sudah di-deploy dan accessible
+
+---
+
+## 📱 Progressive Web App (PWA)
+
+### PWA Features
+
+Aplikasi ini telah dikonfigurasi sebagai Progressive Web App dengan fitur-fitur berikut:
+
+- **Installable**: User dapat menginstall aplikasi ke home screen perangkat mereka
+- **Offline Support**: Service Worker menyediakan caching untuk offline access
+- **App-like Experience**: Standalone display mode untuk pengalaman seperti native app
+- **Auto Update**: Service Worker otomatis update saat ada versi baru
+- **Icons**: Multiple icon sizes untuk berbagai perangkat (72x72, 96x96, 128x128, 144x144, 152x152, 192x192, 384x384, 512x512)
+
+### PWA Configuration
+
+PWA dikonfigurasi di `vite.config.js` menggunakan `vite-plugin-pwa`:
+
+- **Manifest**: Web App Manifest untuk metadata aplikasi
+- **Service Worker**: Otomatis generate dan register
+- **Cache Strategies**:
+  - Static assets: Precached saat build
+  - Google Fonts: Cache First (1 year)
+  - Images: Cache First (30 days)
+
+### Testing PWA
+
+1. Build aplikasi untuk production:
+
+   ```bash
+   npm run build
+   ```
+
+2. Preview production build:
+
+   ```bash
+   npm run preview
+   ```
+
+3. Test di browser:
+   - Buka browser DevTools
+   - Buka tab "Application" > "Service Workers" untuk cek registration
+   - Buka "Manifest" untuk cek manifest configuration
+   - Test "Add to Home Screen" di mobile device
+
+### PWA Icons
+
+Icons untuk PWA berada di `public/icons/` dengan berbagai ukuran:
+
+- 72x72.png, 96x96.png, 128x128.png, 144x144.png
+- 152x152.png, 192x192.png, 384x384.png, 512x512.png
+
+Pastikan semua icon sudah tersedia sebelum build production.
+
+---
+
+## 🎨 Custom Components
+
+### CustomSelect Component
+
+Aplikasi menggunakan custom select component (`CustomSelect.vue`) sebagai pengganti HTML `<select>` default untuk memberikan pengalaman UI yang lebih konsisten dan modern.
+
+**Features:**
+
+- ✅ Custom styling dengan Tailwind CSS
+- ✅ Searchable dropdown (optional)
+- ✅ Disabled state support
+- ✅ Empty option support
+- ✅ Keyboard navigation
+- ✅ Click outside to close
+- ✅ Custom option label/value mapping
+
+**Usage:**
+
+```vue
+<CustomSelect
+  v-model="selectedValue"
+  :options="options"
+  option-label="title"
+  option-value="_id"
+  placeholder="Pilih opsi"
+  :searchable="true"
+  :disabled="false"
+  show-empty-option
+  empty-option-label="Pilih opsi"
+/>
+```
+
+**Props:**
+
+- `modelValue`: Value yang terpilih (v-model)
+- `options`: Array of options
+- `optionLabel`: Property name untuk label (default: 'label')
+- `optionValue`: Property name untuk value (default: 'value')
+- `placeholder`: Placeholder text
+- `disabled`: Disable select (default: false)
+- `searchable`: Enable search functionality (default: false)
+- `showEmptyOption`: Show empty option (default: false)
+- `emptyOptionLabel`: Label untuk empty option
+- `required`: Mark as required (default: false)
+
+**Location:**
+
+- Component: `src/views/components/ui/CustomSelect.vue`
+- Used in: `TransactionModal.vue`, `CategoryModal.vue`
 
 ---
 

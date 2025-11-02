@@ -61,16 +61,16 @@
         <!-- Account Selector -->
         <div>
           <label class="block text-sm font-semibold text-slate-800 mb-2"> Dompet </label>
-          <select
+          <CustomSelect
             v-model="form.accountId"
-            class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:border-transparent transition"
+            :options="accounts"
+            option-label="title"
+            option-value="_id"
+            placeholder="Pilih Dompet"
+            show-empty-option
+            empty-option-label="Pilih Dompet"
             required
-          >
-            <option value="">Pilih Dompet</option>
-            <option v-for="account in accounts" :key="account._id" :value="account._id">
-              {{ account.title }}
-            </option>
-          </select>
+          />
         </div>
 
         <!-- Category Selector -->
@@ -161,6 +161,7 @@
 import { ref, computed, watch } from 'vue'
 import PrimaryButton from './PrimaryButton.vue'
 import CategorySelect from './CategorySelect.vue'
+import CustomSelect from './CustomSelect.vue'
 import { getAccounts } from '@/services/account.service'
 import { getCategories } from '@/services/category.service'
 import { formatDateAPI } from '@/helpers/dateFormat'
