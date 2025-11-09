@@ -36,28 +36,26 @@ const router = createRouter({
 
     // Auth Pages
     {
-      path: '/login',
+      path: '/auth/login',
       name: 'login',
       component: () => import('@/views/pages/auth/LoginPage.vue'),
       meta: { guest: true },
     },
     {
-      path: '/register',
+      path: '/auth/register',
       name: 'register',
       component: () => import('@/views/pages/auth/RegisterPage.vue'),
       meta: { guest: true },
     },
     {
-      path: '/verify-email',
+      path: '/auth/verify-email',
       name: 'verify-email',
       component: () => import('@/views/pages/auth/VerifyEmailPage.vue'),
-      meta: { guest: true },
     },
     {
-      path: '/verify/:token',
+      path: '/auth/verify/:token',
       name: 'verify-token',
       component: () => import('@/views/pages/auth/VerifyTokenPage.vue'),
-      meta: { guest: true },
     },
 
     // App Pages (Protected)
@@ -135,22 +133,42 @@ router.beforeEach(async (to, from, next) => {
     authStore.loadFromStorage()
   }
 
+  // Handle verify-email page separately
+  if (to.name === 'verify-email') {
+    if (authStore.isAuthenticated) {
+      // Authenticated
+      if (authStore.isVerified) {
+        // Already verified, redirect to dashboard
+        next('/app/dashboard')
+        return
+      } else {
+        // Not verified, allow access
+        next()
+        return
+      }
+    } else {
+      // Not authenticated, redirect to login
+      next('/auth/login')
+      return
+    }
+  }
+
   // Check if route requires authentication
   if (to.matched.some((record) => record.meta.requiresAuth)) {
     if (!authStore.isAuthenticated) {
       // Not authenticated, redirect to login
       next({
-        path: '/login',
+        path: '/auth/login',
         query: { redirect: to.fullPath },
       })
     } else if (!authStore.isVerified) {
       // Authenticated but not verified, redirect to verify email
-      // Allow access to verify-email and verify-token pages
-      if (to.name === 'verify-email' || to.name === 'verify-token') {
+      // Allow access to verify-token page
+      if (to.name === 'verify-token') {
         next()
       } else {
         next({
-          path: '/verify-email',
+          path: '/auth/verify-email',
           query: { redirect: to.fullPath },
         })
       }
@@ -183,12 +201,9 @@ router.beforeEach(async (to, from, next) => {
   // Check if route is for guests only (login, register)
   else if (to.matched.some((record) => record.meta.guest)) {
     if (authStore.isAuthenticated) {
-      // If authenticated but not verified, allow access to verify pages
-      if (to.name === 'verify-email' || to.name === 'verify-token') {
-        next()
-      } else if (!authStore.isVerified) {
+      if (!authStore.isVerified) {
         // Not verified, redirect to verify email
-        next('/verify-email')
+        next('/auth/verify-email')
       } else {
         // Already authenticated and verified, redirect to dashboard
         next('/app/dashboard')

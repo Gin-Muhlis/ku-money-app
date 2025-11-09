@@ -12,19 +12,28 @@
         <!-- Desktop Menu (Hidden on Mobile) -->
         <div class="hidden md:flex items-center space-x-8">
           <!-- Left Links -->
-          <RouterLink to="/pricing" class="text-gray-700 hover:text-indigo-600 font-medium transition">
+          <RouterLink
+            to="/pricing"
+            class="text-gray-700 hover:text-indigo-600 font-medium transition"
+          >
             Pricing
           </RouterLink>
-          <RouterLink to="/about" class="text-gray-700 hover:text-indigo-600 font-medium transition">
+          <RouterLink
+            to="/about"
+            class="text-gray-700 hover:text-indigo-600 font-medium transition"
+          >
             About
           </RouterLink>
 
           <!-- Right Links -->
-          <RouterLink to="/login" class="text-gray-700 hover:text-indigo-600 font-medium transition">
+          <RouterLink
+            to="/auth/login"
+            class="text-gray-700 hover:text-indigo-600 font-medium transition"
+          >
             Login
           </RouterLink>
           <RouterLink
-            to="/register"
+            to="/auth/register"
             class="px-4 py-2 bg-indigo-600 text-white rounded-lg font-medium hover:bg-indigo-700 transition shadow-sm"
           >
             Register
@@ -80,14 +89,14 @@
             About
           </RouterLink>
           <RouterLink
-            to="/login"
+            to="/auth/login"
             class="block text-gray-700 hover:text-indigo-600 font-medium transition py-2"
             @click="isMenuOpen = false"
           >
             Login
           </RouterLink>
           <RouterLink
-            to="/register"
+            to="/auth/register"
             class="block w-full text-center px-4 py-2 bg-indigo-600 text-white rounded-lg font-medium hover:bg-indigo-700 transition shadow-sm"
             @click="isMenuOpen = false"
           >

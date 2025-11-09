@@ -23,22 +23,22 @@
             </p>
 
             <p class="text-gray-700 leading-relaxed mb-6">
-              Kami memahami bahwa mengelola keuangan pribadi bisa menjadi tantangan tersendiri.
-              Oleh karena itu, Ku‑Money hadir dengan antarmuka yang intuitif dan fitur-fitur
-              lengkap yang memudahkan Anda untuk mencatat setiap transaksi, membuat anggaran,
-              melacak pengeluaran, dan mencapai tujuan finansial Anda.
+              Kami memahami bahwa mengelola keuangan pribadi bisa menjadi tantangan tersendiri. Oleh
+              karena itu, Ku‑Money hadir dengan antarmuka yang intuitif dan fitur-fitur lengkap yang
+              memudahkan Anda untuk mencatat setiap transaksi, membuat anggaran, melacak
+              pengeluaran, dan mencapai tujuan finansial Anda.
             </p>
 
             <p class="text-gray-700 leading-relaxed mb-6">
-              Dengan Ku‑Money, Anda dapat melihat gambaran lengkap kondisi keuangan Anda dalam
-              satu dashboard yang mudah dipahami. Semua data Anda tersimpan dengan aman dan dapat
-              diakses kapan saja, di mana saja, dari perangkat apa pun.
+              Dengan Ku‑Money, Anda dapat melihat gambaran lengkap kondisi keuangan Anda dalam satu
+              dashboard yang mudah dipahami. Semua data Anda tersimpan dengan aman dan dapat diakses
+              kapan saja, di mana saja, dari perangkat apa pun.
             </p>
 
             <p class="text-gray-700 leading-relaxed">
-              Misi kami adalah memberdayakan setiap orang untuk memiliki kontrol penuh atas
-              keuangan mereka, membuat keputusan finansial yang lebih baik, dan mencapai
-              kebebasan finansial yang mereka impikan.
+              Misi kami adalah memberdayakan setiap orang untuk memiliki kontrol penuh atas keuangan
+              mereka, membuat keputusan finansial yang lebih baik, dan mencapai kebebasan finansial
+              yang mereka impikan.
             </p>
           </div>
 
@@ -55,8 +55,8 @@
             <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
               <h3 class="text-xl font-bold text-slate-800 mb-3">Misi Kami</h3>
               <p class="text-gray-600">
-                Menyediakan solusi pengelolaan keuangan yang mudah, aman, dan accessible untuk
-                semua kalangan dengan teknologi terkini.
+                Menyediakan solusi pengelolaan keuangan yang mudah, aman, dan accessible untuk semua
+                kalangan dengan teknologi terkini.
               </p>
             </div>
           </div>
@@ -64,7 +64,7 @@
           <!-- CTA -->
           <div class="text-center mt-12">
             <RouterLink
-              to="/register"
+              to="/auth/register"
               class="inline-block px-8 py-4 bg-indigo-600 text-white rounded-xl font-semibold hover:bg-indigo-700/90 transition shadow-lg"
             >
               Mulai Sekarang Gratis
@@ -82,4 +82,3 @@
 import Navbar from '@/views/components/landing/Navbar.vue'
 import Footer from '@/views/components/landing/Footer.vue'
 </script>
-

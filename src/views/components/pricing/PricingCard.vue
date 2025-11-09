@@ -73,7 +73,7 @@
 
     <!-- CTA Button -->
     <RouterLink
-      to="/register"
+      to="/auth/register"
       :class="[
         'block w-full text-center py-3 rounded-xl font-semibold transition shadow-md hover:shadow-lg',
         isPopular

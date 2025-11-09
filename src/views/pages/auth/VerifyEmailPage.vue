@@ -51,7 +51,10 @@
         <div class="text-center">
           <p class="text-sm text-gray-600">
             Sudah verifikasi?
-            <RouterLink to="/login" class="text-indigo-600 hover:text-indigo-700 font-semibold">
+            <RouterLink
+              to="/auth/login"
+              class="text-indigo-600 hover:text-indigo-700 font-semibold"
+            >
               Login Sekarang
             </RouterLink>
           </p>

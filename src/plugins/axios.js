@@ -70,7 +70,7 @@ instance.interceptors.response.use(
       if (!refreshToken) {
         // No refresh token, redirect to login
         localStorage.clear()
-        window.location.href = '/login'
+        window.location.href = '/auth/login'
         return Promise.reject(error)
       }
 
@@ -97,7 +97,7 @@ instance.interceptors.response.use(
         // Refresh token failed, clear storage and redirect to login
         processQueue(refreshError, null)
         localStorage.clear()
-        window.location.href = '/login'
+        window.location.href = '/auth/login'
         return Promise.reject(refreshError)
       } finally {
         isRefreshing = false

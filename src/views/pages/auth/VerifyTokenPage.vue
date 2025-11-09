@@ -50,14 +50,14 @@
         {{ errorMessage }}
         <template #actions>
           <RouterLink
-            to="/verify-email"
+            to="/auth/verify-email"
             class="inline-block w-full py-3 px-4 bg-indigo-600 text-white rounded-lg font-semibold hover:bg-indigo-700 transition mb-3"
           >
             Kirim Ulang Email Verifikasi
           </RouterLink>
 
           <RouterLink
-            to="/login"
+            to="/auth/login"
             class="inline-block text-indigo-600 hover:text-indigo-700 font-semibold"
           >
             Kembali ke Login

@@ -154,7 +154,7 @@ const handleLogout = async () => {
 
   if (result.isConfirmed) {
     await authStore.logout()
-    router.push('/login')
+    router.push('/auth/login')
   }
 }
 </script>

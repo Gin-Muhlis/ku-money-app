@@ -25,9 +25,10 @@ export function useAuth() {
 
       // Check if user is verified
       if (!authStore.isVerified) {
-        // Not verified, redirect to verify email page
+        // Not verified, save pending email and redirect to verify email page
+        localStorage.setItem('pendingEmail', form.email)
         router.push({
-          path: '/verify-email',
+          path: '/auth/verify-email',
           query: route.query.redirect ? { redirect: route.query.redirect } : {},
         })
       } else {
@@ -74,7 +75,7 @@ export function useAuth() {
       })
 
       // Redirect to verify email page
-      router.push('/verify-email')
+      router.push('/auth/verify-email')
     } catch (error) {
       console.error('Register error:', error)
       Swal.fire({

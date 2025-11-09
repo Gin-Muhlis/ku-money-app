@@ -68,7 +68,7 @@
           <div class="mt-6 text-center">
             <p class="text-gray-600">
               Belum punya akun?
-              <RouterLink to="/register" class="text-indigo-600 font-semibold hover:underline">
+              <RouterLink to="/auth/register" class="text-indigo-600 font-semibold hover:underline">
                 Daftar sekarang
               </RouterLink>
             </p>

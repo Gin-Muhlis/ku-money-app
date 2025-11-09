@@ -23,7 +23,7 @@
 
       <div class="flex justify-center gap-4">
         <RouterLink
-          to="/register"
+          to="/auth/register"
           class="px-6 py-3 bg-indigo-600 text-white rounded-xl font-semibold hover:bg-indigo-700/90 transition-all shadow-lg"
         >
           Mulai Sekarang
