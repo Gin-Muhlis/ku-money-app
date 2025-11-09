@@ -484,20 +484,41 @@ Aplikasi menggunakan custom select component (`CustomSelect.vue`) sebagai pengga
 
 ## 🔧 Environment Variables
 
-Buat file `.env` di root directory:
+Buat file `.env` di root directory berdasarkan `.env.example`:
 
 ```env
 # Backend API URL
 VITE_BASE_URL=http://localhost:3000/api
+
+# Google OAuth Client ID
+VITE_GOOGLE_CLIENT_ID=your_google_client_id_here
 ```
 
 ### Environment Variables List
 
-| Variable        | Description          | Example                     |
-| --------------- | -------------------- | --------------------------- |
-| `VITE_BASE_URL` | Backend API base URL | `http://localhost:3000/api` |
+| Variable                | Description                                 | Example                          | Required    |
+| ----------------------- | ------------------------------------------- | -------------------------------- | ----------- |
+| `VITE_BASE_URL`         | Backend API base URL                        | `http://localhost:3000/api`      | ✅ Yes      |
+| `VITE_GOOGLE_CLIENT_ID` | Google OAuth Client ID untuk Google Sign-In | `xxx.apps.googleusercontent.com` | ⚠️ Optional |
 
-**Note**: Semua environment variables di Vite harus memiliki prefix `VITE_` untuk bisa diakses di frontend.
+**Note**:
+
+- Semua environment variables di Vite harus memiliki prefix `VITE_` untuk bisa diakses di frontend.
+- `VITE_GOOGLE_CLIENT_ID` hanya diperlukan jika ingin menggunakan fitur Google Sign-In.
+- Untuk production, ganti `VITE_BASE_URL` dengan URL backend production.
+
+### Setup Google OAuth
+
+1. Buka [Google Cloud Console](https://console.cloud.google.com/)
+2. Buat project baru atau pilih project yang sudah ada
+3. Aktifkan **Google Identity Services API**
+4. Buat **OAuth 2.0 Client ID**:
+   - Application type: **Web application**
+   - Authorized JavaScript origins: `http://localhost:3000` (development)
+   - Authorized redirect URIs: `http://localhost:3000` (development)
+5. Copy **Client ID** dan paste ke `.env` sebagai `VITE_GOOGLE_CLIENT_ID`
+
+**File `.env.example`** tersedia di root project sebagai template.
 
 ---
 

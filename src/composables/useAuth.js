@@ -9,6 +9,7 @@ export function useAuth() {
   const authStore = useAuthStore()
 
   const isLoading = ref(false)
+  const isGoogleLoading = ref(false)
 
   const handleLogin = async (form) => {
     if (isLoading.value) return
@@ -88,9 +89,38 @@ export function useAuth() {
     }
   }
 
+  const handleGoogleLogin = async (idToken) => {
+    if (isGoogleLoading.value) return
+
+    try {
+      isGoogleLoading.value = true
+
+      // Call Google login API
+      await authStore.googleLogin(idToken)
+
+      // Google OAuth users are automatically verified
+      // Redirect to intended page or dashboard
+      const redirectPath = route.query.redirect || '/app/dashboard'
+      router.push(redirectPath)
+    } catch (error) {
+      console.error('Google login error:', error)
+      Swal.fire({
+        icon: 'error',
+        title: 'Login Gagal',
+        text: error.message || 'Terjadi kesalahan saat login dengan Google. Silakan coba lagi.',
+        confirmButtonColor: '#4F46E5',
+      })
+      throw error
+    } finally {
+      isGoogleLoading.value = false
+    }
+  }
+
   return {
     isLoading,
+    isGoogleLoading,
     handleLogin,
     handleRegister,
+    handleGoogleLogin,
   }
 }

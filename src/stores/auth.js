@@ -109,6 +109,12 @@ export const useAuthStore = defineStore('auth', () => {
     return response
   }
 
+  const googleLogin = async (idToken) => {
+    const response = await authService.googleAuth(idToken)
+    setAuth(response)
+    return response
+  }
+
   return {
     user,
     accessToken,
@@ -127,5 +133,6 @@ export const useAuthStore = defineStore('auth', () => {
     refreshAccessToken,
     updateUser,
     getMe,
+    googleLogin,
   }
 })

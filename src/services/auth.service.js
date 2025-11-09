@@ -110,3 +110,17 @@ export async function getMe() {
     throw error.response?.data || error
   }
 }
+
+/**
+ * Login or register with Google OAuth
+ * @param {string} idToken - Google ID token
+ * @returns {Promise}
+ */
+export async function googleAuth(idToken) {
+  try {
+    const response = await axios.post('/api/auth/google', { idToken })
+    return response.data
+  } catch (error) {
+    throw error.response?.data || error
+  }
+}
